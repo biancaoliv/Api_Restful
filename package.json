@@ -8,7 +8,11 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node-modules src/shared/http/server.ts",
     "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix"
+    "lint-fix": "eslint . --ext .ts --fix",
+    "migration:create": "./src/shared/scripts/migration-helper.sh create",
+    "migration:generate": "./src/shared/scripts/migration-helper.sh generate",
+    "migration:run": "./src/shared/scripts/migration-helper.sh run",
+    "migration:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
