@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "ts-node-dev -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node-modules src/shared/http/server.ts",
     "lint": "eslint . --ext .ts",
-    "lint-fix": "eslint . --ext .ts --fix"
+    "lint-fix": "eslint . --ext .ts --fix",
+    "migration:generate": "typeorm-ts-node-commonjs -d ./src/shared/typeorm/data-source.ts migration:generate ./src/shared/typeorm/migrations/CreateProducts",
+    "migration:run": "typeorm-ts-node-commonjs -d ./src/shared/typeorm/data-source.ts migration:run"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
