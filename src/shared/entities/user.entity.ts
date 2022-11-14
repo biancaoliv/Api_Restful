@@ -1,5 +1,5 @@
 import { BaseEntity, Column, CreateDateColumn, DeleteDateColumn, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm'
-import { Table } from './Table'
+import { Table } from './table.entity'
 
 
 @Entity({ name: 'users' })
@@ -14,10 +14,10 @@ export class User extends BaseEntity {
     name: string
 
     @ManyToMany(() => Table, table => table.users)
-    tables: Table[]
+    tables?: Table[]
 
     @OneToMany(() => Table, table => table.tablePayer)
-    tablePayments: Table[] 
+    tablePayments?: Table[] 
 
     @CreateDateColumn()
     createdAt: Date
