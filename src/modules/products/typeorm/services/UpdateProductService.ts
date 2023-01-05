@@ -11,16 +11,31 @@ interface IRequest {
 }
 
 class UpdateProductService {
-  public async execute({ id, name, price, quantity }: IRequest): Promise<Product | undefined> {
+  public async execute({
+    id,
+    name,
+    price,
+    quantity,
+  }: IRequest): Promise<Product> {
     const productsRepository = getCustomRepository(ProductRepository);
 
-    const product = productsRepository.findOne(id);
+    const product = await productsRepository.findOne(id);
 
     if (!product) {
       throw new AppError('Product not found.');
     }
 
-    
+    const productsExists = await productsRepository.findByName(name);
+
+    if (productsExists && name != product.name) {
+      throw new AppError('There is already one product');
+    }
+
+    product.name = name;
+    product.price = price;
+    product.quantity = quantity;
+
+    await productsRepository.save(product);
 
     return product;
   }

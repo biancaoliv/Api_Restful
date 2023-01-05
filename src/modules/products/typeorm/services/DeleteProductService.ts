@@ -7,8 +7,8 @@ interface IRequest {
   id: string;
 }
 
-class ShowProductService {
-  public async execute({ id }: IRequest): Promise<Product | undefined> {
+class DeleteProductService {
+  public async execute({ id }: IRequest): Promise<void> {
     const productsRepository = getCustomRepository(ProductRepository);
 
     const product = await productsRepository.findOne(id);
@@ -17,8 +17,8 @@ class ShowProductService {
       throw new AppError('Product not found.');
     }
 
-    return product;
+    await productsRepository.remove(product);
   }
 }
 
-export default ShowProductService;
+export default DeleteProductService;
