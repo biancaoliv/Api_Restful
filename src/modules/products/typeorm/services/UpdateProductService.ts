@@ -5,10 +5,13 @@ import Product from '../entities/product';
 
 interface IRequest {
   id: string;
+  name: string;
+  price: number;
+  quantity: number;
 }
 
-class ShowProductService {
-  public async execute({ id }: IRequest): Promise<Product | undefined> {
+class UpdateProductService {
+  public async execute({ id, name, price, quantity }: IRequest): Promise<Product | undefined> {
     const productsRepository = getCustomRepository(ProductRepository);
 
     const product = productsRepository.findOne(id);
@@ -17,8 +20,10 @@ class ShowProductService {
       throw new AppError('Product not found.');
     }
 
+    
+
     return product;
   }
 }
 
-export default ShowProductService;
+export default UpdateProductService;
